@@ -8,7 +8,7 @@ local layerName = "neo2_layer3";
   description: "Neo2 Layer 3",
   manipulators: [
     // layer toggling
-    lockLayer(layerName, "caps_lock", "backslash"),
+    lockLayer(layerName, ["caps_lock", "backslash"]),
     toggleLayer(layerName, "caps_lock"),
     toggleLayer(layerName, "backslash"),
     // numbers row

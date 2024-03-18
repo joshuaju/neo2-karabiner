@@ -8,7 +8,7 @@ local layerName = "neo2_layer4";
   description: "Neo2 Layer 4",
   manipulators: [
     // layer toggling
-    lockLayer(layerName, "grave_accent_and_tilde", "right_command"),
+    lockLayer(layerName, ["grave_accent_and_tilde", "right_command"]),
     toggleLayer(layerName, "grave_accent_and_tilde"),
     toggleLayer(layerName, "right_command"),
     // numbers row

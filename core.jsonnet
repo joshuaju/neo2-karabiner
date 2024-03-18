@@ -18,6 +18,26 @@
         type: "basic",
     },
 
+    // ignores the key code
+    shiftSwallow(layerName, keyCode): {
+        conditions: [
+            {
+                name: layerName,
+                type: "variable_unless",
+                value: 0,
+            },
+        ],
+        from: {
+                key_code: keyCode,
+                modifiers: {
+                    mandatory: ["shift"],
+                    optional: ["any"]
+                }
+        },
+        to: [],
+        type: "basic",
+    },
+
     // maps from a key code to another key code with modifiers
     mapping(layerName, fromKeyCode, toKeyCode, toModifiers): {
         conditions: [
@@ -42,8 +62,58 @@
         type: "basic",
     },
 
-    // when both keys are pressed at the same time the layer variable stays active
-    lockLayer(layerName, keyCode1, keyCode2) : {
+    // only if no modifier is pressed, maps from a key code to another key code with modifiers
+    shiftOptMapping(layerName, fromKeyCode, toKeyCode, toModifiers): {
+        conditions: [
+            {
+                name: layerName,
+                type: "variable_unless",
+                value: 0,
+            },
+        ],
+        from: {
+                key_code: fromKeyCode,
+                modifiers: {
+                    optional: ["shift"]
+                }
+        },
+        to: [
+            {
+                key_code: toKeyCode,
+                modifiers: toModifiers,
+            },
+        ],
+        type: "basic",
+    },
+
+
+    // only if shift is pressed, maps from a key code to another key code with modifiers
+    shiftMapping(layerName, fromKeyCode, toKeyCode, toModifiers): {
+        conditions: [
+            {
+                name: layerName,
+                type: "variable_unless",
+                value: 0,
+            },
+        ],
+        from: {
+                key_code: fromKeyCode,
+                modifiers: {
+                    mandatory: ["shift"]
+                }            
+        },
+        to: [
+            {
+                key_code: toKeyCode,
+                modifiers: toModifiers,
+            },
+        ],
+        type: "basic",
+    },
+
+
+    // when all keys are pressed at the same time the layer variable stays active
+    lockLayer(layerName, keyCodes) : {
         conditions: [
             {
                 name: layerName,
@@ -52,10 +122,7 @@
             },
         ],
         from: {
-            simultaneous: [
-                { key_code: keyCode1 },
-                { key_code: keyCode2 },
-            ],
+            simultaneous: std.map(function(keyCode) { key_code: keyCode }, keyCodes)
         },
         to: [
             {
@@ -63,6 +130,30 @@
                 set_variable: {
                     name: layerName,
                     value: 2,
+            },
+            },
+        ],
+        type: "basic",
+    },
+
+    // when all keys are pressed at the same time the layer variable stays active
+    unlockLayer(layerName, keyCodes) : {
+        conditions: [
+            {
+                name: layerName,
+                type: "variable_if",
+                value: 2,
+            },
+        ],
+        from: {
+            simultaneous: std.map(function(keyCode) { key_code: keyCode }, keyCodes)
+        },
+        to: [
+            {
+                halt: true,
+                set_variable: {
+                    name: layerName,
+                    value: 0,
             },
             },
         ],
