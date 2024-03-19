@@ -1,7 +1,6 @@
 local shiftOptMapping = (import 'core.jsonnet').shiftOptMapping;
 local shiftMapping = (import 'core.jsonnet').shiftMapping;
 local swallow = (import 'core.jsonnet').swallow;
-local shiftSwallow = (import 'core.jsonnet').shiftSwallow;
 local lockLayer = (import 'core.jsonnet').lockLayer;
 local unlockLayer = (import 'core.jsonnet').unlockLayer;
 local layerName = "neo2_bone";
@@ -11,7 +10,6 @@ local layerName = "neo2_bone";
     manipulators: [
         lockLayer(layerName, ["f", "g", "h", "j"]),
         unlockLayer(layerName, ["f", "g", "h", "j"]),
-        
         // numbers row
         //swallow(layerName, "non_us_backslash"),
         //swallow(layerName, "1"),
@@ -26,7 +24,7 @@ local layerName = "neo2_bone";
         //swallow(layerName, "0"),
         shiftMapping(layerName, "hyphen", "hyphen", ["right_shift"]),
         shiftOptMapping(layerName, "hyphen", "slash", []),
-        shiftSwallow(layerName, "equal_sign"),
+        swallow(layerName, "equal_sign", ["shift"]),
         shiftOptMapping(layerName, "equal_sign", "equal_sign", ["right_shift"]),
         // 1. letters row
         shiftOptMapping(layerName, "q", "j", []),
@@ -39,9 +37,9 @@ local layerName = "neo2_bone";
         shiftOptMapping(layerName, "i", "l",  []),
         shiftOptMapping(layerName, "o", "m",  []),
         shiftOptMapping(layerName, "p", "w",  []),
-        shiftSwallow(layerName, "open_bracket"),
+        swallow(layerName, "open_bracket", ["shift"]),
         shiftOptMapping(layerName, "open_bracket", "hyphen", []),
-        shiftSwallow(layerName, "close_bracket"),
+        swallow(layerName, "close_bracket", ["shift"]),
         shiftOptMapping(layerName, "close_bracket", "equal_sign", []),
         // 2. letters row
         shiftOptMapping(layerName, "a", "c",  []),

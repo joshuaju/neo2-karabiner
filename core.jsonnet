@@ -1,6 +1,6 @@
 {
     // ignores the key code
-    swallow(layerName, keyCode): {
+    swallow(layerName, keyCode, mandatoryModifiers = []): {
         conditions: [
             {
                 name: layerName,
@@ -11,26 +11,7 @@
         from: {
                 key_code: keyCode,
                 modifiers: {
-                optional: ["any"]
-            }
-        },
-        to: [],
-        type: "basic",
-    },
-
-    // ignores the key code
-    shiftSwallow(layerName, keyCode): {
-        conditions: [
-            {
-                name: layerName,
-                type: "variable_unless",
-                value: 0,
-            },
-        ],
-        from: {
-                key_code: keyCode,
-                modifiers: {
-                    mandatory: ["shift"],
+                    mandatory: mandatoryModifiers,
                     optional: ["any"]
                 }
         },
@@ -62,7 +43,7 @@
         type: "basic",
     },
 
-    // only if no modifier is pressed, maps from a key code to another key code with modifiers
+    // only if no modifier (except shift) is pressed, maps from a key code to another key code with modifiers
     shiftOptMapping(layerName, fromKeyCode, toKeyCode, toModifiers): {
         conditions: [
             {
