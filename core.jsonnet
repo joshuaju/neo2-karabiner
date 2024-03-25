@@ -43,31 +43,6 @@
         type: "basic",
     },
 
-    // only if no modifier (except shift) is pressed, maps from a key code to another key code with modifiers
-    shiftOptMapping(layerName, fromKeyCode, toKeyCode, toModifiers): {
-        conditions: [
-            {
-                name: layerName,
-                type: "variable_unless",
-                value: 0,
-            },
-        ],
-        from: {
-                key_code: fromKeyCode,
-                modifiers: {
-                    optional: ["shift"]
-                }
-        },
-        to: [
-            {
-                key_code: toKeyCode,
-                modifiers: toModifiers,
-            },
-        ],
-        type: "basic",
-    },
-
-
     // only if shift is pressed, maps from a key code to another key code with modifiers
     shiftMapping(layerName, fromKeyCode, toKeyCode, toModifiers): {
         conditions: [
