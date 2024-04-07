@@ -61,10 +61,10 @@ local layerName = "neo2_bone";
         mapping(layerName, "b", "semicolon",  []),
         mapping(layerName, "n", "z", []),
         mapping(layerName, "m", "y",  []),
-        shiftMapping(layerName, "comma", "slash", []),
-        mapping(layerName, "comma", "comma",  []),
-        shiftMapping(layerName, "period", "open_bracket", ["right_option"]),
-        mapping(layerName, "period", "period",  []),
+        //shiftMapping(layerName, "comma", "slash", []),
+        //mapping(layerName, "comma", "comma",  []),
+        //shiftMapping(layerName, "period", "open_bracket", ["right_option"]),
+        //mapping(layerName, "period", "period",  []),
         mapping(layerName, "slash", "k",  []),
     ]
 }
